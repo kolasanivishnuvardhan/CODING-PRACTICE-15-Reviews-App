@@ -3,20 +3,23 @@ import {Component} from 'react'
 import './index.css'
 
 class ReviewsCarousel extends Component {
-  state = {review: this.props.reviewsList[0], index: 0}
+  constructor(props){
+    super(props)
+    const {reviewsList} = this.props
+    this.state = {review:reviewsList[0]}
+
+  }
   onClickLeftArrow = () => {
     const {review} = this.state
     const {reviewsList} = this.props
     const currentIndex = reviewsList.findIndex(
       obj => obj.username === review.username,
     )
-    //console.log(index)
     if (currentIndex === 0) {
-      this.setState({review: this.props.reviewsList[0], index: 0})
+      this.setState({review: reviewsList[0]})
     } else {
       this.setState({
-        review: this.props.reviewsList[currentIndex - 1],
-        index: currentIndex - 1,
+        review: reviewsList[currentIndex - 1]
       })
     }
   }
@@ -29,14 +32,10 @@ class ReviewsCarousel extends Component {
     )
     if (currentIndex < reviewsList.length - 1) {
       this.setState({
-        review: this.props.reviewsList[currentIndex + 1],
-        index: currentIndex + 1,
-      })
+        review:reviewsList[currentIndex + 1]})
     } else {
       this.setState({
-        review: this.props.reviewsList[reviewsList.length - 1],
-        index: reviewsList.length - 1,
-      })
+        review:reviewsList[reviewsList.length - 1]      })
     }
   }
   render() {
